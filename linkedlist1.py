@@ -13,7 +13,30 @@ class LinkedList:
             return: The modified LinkedList
             raise: IndexError if pos is outside of the list
         """
+        if pos < 0:
+          raise IndexError("position cannot be negative")
+        
+        if pos == 0:
+          element.next = self.head
+          if self.head:
+            self.head.previous = element
+          self.head = element
+          return self
 
+        current = self.head
+        index = 0
+
+        while current is not None and index < pos - 1:
+          current = current.next
+          index += 1
+
+        element.next = current.next
+        if current.next:
+          current.next.previous = elemnet
+        current.next = element
+        element.previous = current
+
+        return self
 
 
     def remove(self, pos):
